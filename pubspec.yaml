@@ -1,0 +1,21 @@
+name: mobx_flutter
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.4.0-65.0.dev <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  mobx: ^2.3.0+1
+  flutter_mobx: ^2.2.0+2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true

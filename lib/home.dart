@@ -1,56 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx_flutter/controller.dart';
 
 class MyHomePage extends StatelessWidget {
-  final controller = Controller();
+  _textField({String? labelText, onChanged, String Function()? errorText}) {
+    return TextField(
+      onChanged: onChanged,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        labelText: labelText,
+        errorText: errorText == null ? null : errorText(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('MobX'),
+        title: const Text('Formulario'),
       ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(25.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextField(
-                decoration: InputDecoration(labelText: 'Nome'),
-                onChanged: controller.changeName,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextField(
-                decoration: InputDecoration(labelText: 'Sobrenome'),
-                onChanged: controller.changeSobrenome,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Observer(
-                builder: (_) {
-                  return Text(
-                    controller.nomeCompleto,
-                    style: const TextStyle(fontSize: 20),
-                  );
-                },
-              ),
-              SizedBox(
-                height: 200,
-              ),
-            ],
-          ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: <Widget>[
+            _textField(labelText: 'name'),
+          ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          controller;
-        },
-        child: const Icon(Icons.add),
       ),
     );
   }

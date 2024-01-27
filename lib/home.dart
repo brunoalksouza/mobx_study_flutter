@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx_flutter/controller.dart';
+import 'package:flutter_mobx/src/observer.dart';
 
-class MyHomePage extends StatelessWidget {
-  _textField({String? labelText, onChanged, String Function()? errorText}) {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final controller = Controller();
+
+  _textField(
+      {String? labelText, onChanged, required String? Function() errorText}) {
     return TextField(
       onChanged: onChanged,
       decoration: InputDecoration(
@@ -25,7 +35,31 @@ class MyHomePage extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: <Widget>[
-            _textField(labelText: 'name'),
+            Observer(
+              builder: (_) {
+                return _textField(
+                  labelText: 'Nome',
+                  onChanged: controller.client.changeName,
+                  errorText: controller.validateName,
+                );
+              },
+            ),
+            const SizedBox(height: 30),
+            Observer(
+              builder: (_) {
+                return _textField(
+                  labelText: 'Email',
+                  onChanged: controller.client.changeEmail,
+                  errorText: controller.validateEmail,
+                );
+              },
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              
+              onPressed: () {},
+              child: const Text('Salvar'),
+            )
           ],
         ),
       ),

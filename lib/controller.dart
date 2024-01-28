@@ -6,7 +6,7 @@ class Controller = _ControllerBase with _$Controller;
 
 abstract class _ControllerBase with Store {
   var client = Client();
-
+  
   @computed
   bool get isValid {
     return validateName() == null && validateEmail() == null;

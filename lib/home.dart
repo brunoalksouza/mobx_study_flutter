@@ -55,10 +55,15 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             const SizedBox(height: 30),
-            ElevatedButton(
-              
-              onPressed: () {},
-              child: const Text('Salvar'),
+            Observer(
+              builder: (_) {
+                return ElevatedButton(
+                  child: const Text('Salvar'),
+                  onPressed: () {
+                    controller.isValid ? () : print('Formulário inválido');
+                  },
+                );
+              },
             )
           ],
         ),
